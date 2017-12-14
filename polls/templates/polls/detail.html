@@ -1,0 +1,17 @@
+<h1>{{ poll.question }}</h1>
+<ul>
+
+{% for choice in poll.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+<a href="{% url 'polls:results' poll.id %}">Results </a><br>
+<a href="{% url 'polls:vote' poll.id %}">Vote </a>
+</ul>
+
+{% if error_message %} <p><strong>{{ error_mesage }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' poll.id %}" method="post">
+    {% csrf_token %}
+    
+
+</form>
